@@ -25,7 +25,7 @@ import lombok.Setter;
 @NoArgsConstructor
 @AllArgsConstructor
 @Getter @Setter
-@Entity(name = "tb_request_stage")
+@Entity(name = "request_stage")
 public class RequestStage implements Serializable {
 	
 	/**
@@ -37,15 +37,14 @@ public class RequestStage implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
-
-	@Column(name = "realization_date", nullable = false)
-	@Temporal(TemporalType.TIMESTAMP)
-	private Date realizationDate;
-	
-	
 	@Column(columnDefinition = "text")
 	private String description;
 	
+	
+	@Column(name = "realization_date", nullable = false, updatable = false)
+	@Temporal(TemporalType.TIMESTAMP)
+	private Date realizationDate;
+			
 	@Column(length = 20, nullable = false)
 	@Enumerated(EnumType.STRING)
 	private RequestState requestState;
