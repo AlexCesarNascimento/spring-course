@@ -74,7 +74,7 @@ public class RequestRepositoryTests {
 	
 	@Test
 	public void updatStatusTest() {
-		int affectedRows = requestRepository.updateStatus(2L, RequestState.IN_PROGRESS);
+		int affectedRows = requestRepository.updateStatus(1L, RequestState.IN_PROGRESS);
 		assertThat(affectedRows).isEqualTo(1);
 	}
 	
