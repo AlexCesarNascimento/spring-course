@@ -1,5 +1,7 @@
 package com.springcourse.resource;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -11,7 +13,10 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.springcourse.domain.Request;
 import com.springcourse.domain.User;
+import com.springcourse.dto.UserLoginDto;
+import com.springcourse.service.RequestService;
 import com.springcourse.service.UserService;
 
 @RestController
@@ -19,6 +24,9 @@ import com.springcourse.service.UserService;
 public class UserResource {
 	@Autowired
 	private UserService userService;
+	
+	@Autowired
+	private RequestService requestService;
 	
 	//save
 	@PostMapping
@@ -44,5 +52,24 @@ public class UserResource {
 	
 	
 	//list
-	//login
+	@GetMapping
+	public ResponseEntity<List<User>> ListAll() {
+		List<User> users = userService.listAll();
+		return ResponseEntity.ok(users);
+	}
+	
+	//login ---- Foi criado um novo pacote DTO para este metodo
+	@PostMapping("/login")
+	public ResponseEntity<User> login(@RequestBody UserLoginDto user) {
+		User loggedUser = userService.login(user.getEmail(), user.getPassword());
+		return ResponseEntity.ok(loggedUser);
+	}
+	
+	@GetMapping("/{id}/requests")
+	public ResponseEntity<List<Request>> listAllRequestsById(@PathVariable (name = "id") Long id) {
+		List<Request> requests = requestService.ListAllByOwnerId(id);
+		return ResponseEntity.ok(requests);
+	}
+	
+	
 }
