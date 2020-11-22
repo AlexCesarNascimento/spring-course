@@ -71,5 +71,5 @@ public class UserResource {
 		return ResponseEntity.ok(requests);
 	}
 	
-	
+	//list all by owner id -- http://localhost:8080/users/1/requests
 }
