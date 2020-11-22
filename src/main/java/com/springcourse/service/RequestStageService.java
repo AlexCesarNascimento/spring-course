@@ -22,7 +22,7 @@ public class RequestStageService {
 	private RequestRepository requestRepository;
 	
 	// save
-	private RequestStage save(RequestStage stage) {
+	public RequestStage save(RequestStage stage) {
 		stage.setRealizationDate(new Date());
 		
 		RequestStage createdStage = requestStageRepository.save(stage);
